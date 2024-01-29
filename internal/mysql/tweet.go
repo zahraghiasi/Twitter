@@ -22,7 +22,7 @@ func (u *TweetMysqlRepo) Add(update *repositories.Tweet) error {
 
 func (u *TweetMysqlRepo) GetAll() []repositories.Tweet {
 	tweets := []repositories.Tweet{}
-	u.db.Find(tweets)
+	u.db.Find(&tweets)
 	return tweets
 }
 

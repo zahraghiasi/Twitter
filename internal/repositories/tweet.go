@@ -22,3 +22,9 @@ type TweetResponse struct {
 	Message   string
 	ReTweetId *uint
 }
+
+type TweetRequest struct {
+	Message   string
+	ReTweetId *uint
+}
+
