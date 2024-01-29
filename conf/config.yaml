@@ -1,0 +1,17 @@
+core:
+  mode: "debug" # release, debug, test
+  server_name: "social-network"
+  port: 9090
+mysql:
+  host: "127.0.0.1"
+  port: "3306"
+  db: "service"
+  user: "root"
+  pass: "mghiasi"
+log:
+  level: debug
+  discard_output: false
+mongo:
+  address: "localhost:27017"
+  username: "social"
+  password: "social"
