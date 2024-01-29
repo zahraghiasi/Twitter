@@ -15,42 +15,10 @@ func (h *Handler) UnFollowUser(c echo.Context) error {
 }
 
 func (h *Handler) FollowUser(follower, following uint) *access.ServerError {
-	// TODO increase speed
-	//_, exist := h.repos.FollowCostumerAndSequenceScogramRepo.IsExist(follower, following)
-	//if exist {
-	//	return nil
-	//}
-	//_, costumerFollowedFound := h.jhonClient.GetUser(u.UserID)
-	//if costumerFollowedFound != nil {
-	//	return access.GetError(text.UserNotFound)
-	//}
-	//if !exist {
-	//	h.repos.FollowCostumerAndSequenceScogramRepo.Add(scogram.FollowCostumerAndSequence{
-	//		FollowerCostumerID: cc.UserObj.ID,
-	//		FollowedCostumerID: u.UserID,
-	//		LastSeq:            0,
-	//	})
-	//} else {
-	//	h.repos.FollowCostumerAndSequenceScogramRepo.Add(scogram.FollowCostumerAndSequence{
-	//		FollowerCostumerID: cc.UserObj.ID,
-	//		FollowedCostumerID: u.UserID,
-	//		LastSeq:            0,
-	//	})
-	//}
 	return nil
 }
 
 func (h *Handler) AddPost(cc *middlewares.CustomContext, costumerID uint64) *access.ServerError {
-	//kind := new(requests.PostRequest)
-	//post := repositories.Tweet{
-	//	UserID:    0,
-	//	Message:   nil,
-	//	ReTweetID: nil,
-	//}
-	//err := h.repos.PostsScogramRepo.Add(&post)
-	//if err != nil {
-	//	return err
-	//}
 	return nil
 }
 
@@ -82,13 +50,5 @@ func (h *Handler) RemovePost(cc *middlewares.CustomContext) error {
 // most views
 // most likes
 func (h *Handler) GetPosts(c echo.Context) error {
-	//cc := c.(*middlewares.CustomContext)
-	//loggedIn, costumerObj := cc.IsLoggedInUser()
-	//if !loggedIn {
-	//	return response.GetUnAuthorized(c)
-	//}
-
-	//var postResponse []scogram.ScogramPost
-
 	return response.GetResult(c, true)
 }

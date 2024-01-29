@@ -64,7 +64,7 @@ func (h *HttpServer) createTweet(context echo.Context) error {
 	if !cc.LoggedIn {
 		return response.GetUnAuthorized(context)
 	}
-	err := h.handler.CreateTweet(cc.UserObj.ID, string(u.Message), u.ReTweetId)
+	err := h.handler.CreateTweet(cc.UserObj.ID, u.Message, u.ReTweetID)
 	if err != nil {
 		return response.FromServerError(cc, *err)
 	}
@@ -87,12 +87,16 @@ func (h *HttpServer) getTweet(context echo.Context) error {
 
 func (h *HttpServer) editTweet(context echo.Context) error {
 	cc := context.(*middlewares.CustomContext)
-	var query Query
+	var query repositories.TweetRequest
 	err := context.Bind(&query)
 	if err != nil {
 		return response.GetBadRequest(context, err.Error())
 	}
-	return h.NotImplement(cc)
+	serverError := h.handler.EditTweet(cc.UserObj.ID, query.ID, query.Message)
+	if serverError != nil {
+		return response.FromServerError(cc, *serverError)
+	}
+	return response.GetTrueSuccess(cc)
 }
 
 func (h *HttpServer) deleteTweet(context echo.Context) error {
@@ -101,6 +105,10 @@ func (h *HttpServer) deleteTweet(context echo.Context) error {
 	err := context.Bind(&query)
 	if err != nil {
 		return response.GetBadRequest(context, err.Error())
+	}
+	serverError := h.handler.DeleteTweet(cc.UserObj.ID, query.ID)
+	if serverError != nil {
+		return response.FromServerError(cc, *serverError)
 	}
 	return h.NotImplement(cc)
 }
@@ -112,6 +120,10 @@ func (h *HttpServer) likeReact(context echo.Context) error {
 	if err != nil {
 		return response.GetBadRequest(context, err.Error())
 	}
+	//serverError := h.handler.Like(cc.UserObj.ID, query.ID)
+	//if serverError != nil {
+	//	return response.FromServerError(cc, *serverError)
+	//}
 	return h.NotImplement(cc)
 }
 

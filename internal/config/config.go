@@ -21,10 +21,10 @@ log:
   discard_output: false
 mysql:
   host: "127.0.0.1"
-  port: "4306"
+  port: "3306"
   db: "service"
   user: "root"
-  pass: ""
+  pass: "ghiasi"
 mongo:
   address: "localhost:27017"
   username: "ghiasi"

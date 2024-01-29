@@ -12,10 +12,7 @@ import (
 )
 
 func FromServerError(cc *middlewares.CustomContext, response access.ServerError) error {
-	des := text.GetError(response.Response, text.Fa)
-	if response.Description != nil {
-		des = response.Description.English
-	}
+	des := text.GetError(response.Response)
 	fmt.Println(response.Error)
 	return FromGeneralResponse(cc, GeneralResponse{
 		Ok:          false,
@@ -26,7 +23,7 @@ func FromServerError(cc *middlewares.CustomContext, response access.ServerError)
 }
 
 func ErrorNotFound(cc *middlewares.CustomContext) error {
-	description := text.GetError(text.NotFound, text.Fa)
+	description := text.GetError(text.NotFound)
 	return cc.JSON(http.StatusNotFound, GeneralResponse{
 		Ok:          false,
 		Description: description,
@@ -37,15 +34,6 @@ func GetBadRequest(c echo.Context, description string) error {
 	return c.JSON(http.StatusBadRequest, GeneralResponse{
 		Ok:          false,
 		Description: description,
-	})
-}
-
-func FromWordLang(c *middlewares.CustomContext, wordLang text.WordLang, errorCode int) error {
-	description := wordLang.Persian
-	return FromGeneralResponse(c, GeneralResponse{
-		Ok:          false,
-		Description: description,
-		Code:        errorCode,
 	})
 }
 

@@ -31,3 +31,13 @@ func (u *TweetMysqlRepo) Get(i uint) (repositories.Tweet, bool) {
 	notFound := u.db.Where("id = ? ", i).First(&session).RecordNotFound()
 	return session, !notFound
 }
+
+func (u *TweetMysqlRepo) EditTweet(id uint, message []byte) error {
+	return u.db.Where("id = ? ", id).Model(&repositories.Tweet{}).Updates(map[string]interface{}{
+		"message": message,
+	}).Error
+}
+
+func (u *TweetMysqlRepo) DeleteTweet(id uint) error {
+	return u.db.Where("id = ? ", id).Model(&repositories.Tweet{}).Delete(id).Error
+}

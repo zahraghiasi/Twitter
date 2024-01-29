@@ -4,10 +4,10 @@ core:
   port: 9090
 mysql:
   host: "127.0.0.1"
-  port: "4306"
+  port: "3306"
   db: "service"
   user: "root"
-  pass: ""
+  pass: "mghiasi"
 log:
   level: debug
   discard_output: false

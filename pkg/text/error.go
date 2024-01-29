@@ -1,73 +1,25 @@
 package text
 
-func GetError(cons ServerText, lang ServerLang) string {
-	var errors = map[ServerText]WordLang{
-		ExceedLimit: {
-			English: "Exceed Limit",
-			Persian: "محدودیت شما به اتمام رسیده است",
-		},
-		BadRequest: {
-			English: "invalid input",
-			Persian: "ورودی نامعتبر است",
-		},
-		NotFound: {
-			English: "پیدا نشد",
-			Persian: "Not found",
-		},
-		TryAgain: {
-			English: "Try Again",
-			Persian: "دوباره تلاش کنید",
-		},
-		InvalidInput: {
-			English: "Invalid Input",
-			Persian: "ورودی نامعتبر است",
-		},
-		UserNotFound: {
-			English: "UserNotFound",
-			Persian: "کاربر پیدا نشد",
-		},
-		NotEnoughChar: {
-			English: "NotEnoughChar",
-			Persian: "تعداد کارکتر از حد مجاز کمتر است",
-		},
-		NotReceivedFile: {
-			English: "NotReceivedFile",
-			Persian: "فایل آپلود نشده",
-		},
-		NotAcceptable: {
-			English: "NotAcceptable",
-			Persian: "غیرقابل قبول",
-		},
-		Forbidden: {
-			English: "Forbidden",
-			Persian: "ورود غیرمجاز است",
-		},
-		TitleAddressInvalid: {
-			English: "Invalid title",
-			Persian: "عنوان مکان کمتر از حد مجاز است",
-		},
-		UsernameExist: {
-			English: "Username Exist!",
-			Persian: "نام کاربری وجود دارد",
-		},
-		UserOrPassInvalid: {
-			English: "UserOrPassInvalid!",
-			Persian: "UserOrPassInvalid",
-		},
+func GetError(cons ServerText) string {
+	var errors = map[ServerText]string{
+		ExceedLimit:         "محدودیت شما به اتمام رسیده است",
+		BadRequest:          "ورودی نامعتبر است",
+		NotFound:            "Not found",
+		TryAgain:            "دوباره تلاش کنید",
+		InvalidInput:        "ورودی نامعتبر است",
+		UserNotFound:        "کاربر پیدا نشد",
+		NotEnoughChar:       "تعداد کارکتر از حد مجاز کمتر است",
+		NotReceivedFile:     "فایل آپلود نشده",
+		NotAcceptable:       "غیرقابل قبول",
+		Forbidden:           "ورود غیرمجاز است",
+		TitleAddressInvalid: "عنوان مکان کمتر از حد مجاز است",
+		UsernameExist:       "نام کاربری وجود دارد",
+		UserOrPassInvalid:   "UserOrPassInvalid",
 	}
-	if lang == Fa {
-		return errors[cons].Persian
-	} else {
-		return errors[cons].English
-	}
+	return errors[cons]
 }
 
 type ServerText int
-
-type WordLang struct {
-	English string
-	Persian string
-}
 
 func (s ServerText) String() string {
 	switch s {

@@ -55,3 +55,33 @@ func (h *Handler) GetTweets() []repositories.TweetResponse {
 	}
 	return responses
 }
+
+func (h *Handler) EditTweet(userID, id uint, message string) *access.ServerError {
+	tweet, found := h.TweetRepo.Get(id)
+	if !found {
+		return access.GetError(text.NotFound)
+	}
+	if tweet.UserID != userID {
+		return access.GetError(text.Forbidden)
+	}
+	err := h.TweetRepo.EditTweet(tweet.ID, []byte(message))
+	if err != nil {
+		return access.GetInternalError("Edit Tweet", err)
+	}
+	return nil
+}
+
+func (h *Handler) DeleteTweet(userID, id uint) *access.ServerError {
+	tweet, found := h.TweetRepo.Get(id)
+	if !found {
+		return access.GetError(text.NotFound)
+	}
+	if tweet.UserID != userID {
+		return access.GetError(text.Forbidden)
+	}
+	err := h.TweetRepo.DeleteTweet(tweet.ID)
+	if err != nil {
+		return access.GetInternalError("Delete Tweet", err)
+	}
+	return nil
+}

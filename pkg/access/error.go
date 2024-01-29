@@ -7,7 +7,7 @@ import (
 
 type ServerError struct {
 	Response    text.ServerText
-	Description *text.WordLang
+	Description *string
 	Code        int
 	Where       string
 	Error       error
