@@ -32,7 +32,7 @@ func (c *CustomContext) ClearCacheByToken(token string) {
 	c.Cache.Delete(sessionCacheKey)
 }
 
-func (c *CustomContext) IsLoggedInCostumer() (bool, repositories.User) {
+func (c *CustomContext) IsLoggedInUser() (bool, repositories.User) {
 	bar := strings.Split(c.Request().Header.Get("Authorization"), " ")
 	if len(bar) == 2 {
 		token := bar[1]

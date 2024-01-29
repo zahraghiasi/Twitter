@@ -83,7 +83,7 @@ func (h *Handler) RemovePost(cc *middlewares.CustomContext) error {
 // most likes
 func (h *Handler) GetPosts(c echo.Context) error {
 	//cc := c.(*middlewares.CustomContext)
-	//loggedIn, costumerObj := cc.IsLoggedInCostumer()
+	//loggedIn, costumerObj := cc.IsLoggedInUser()
 	//if !loggedIn {
 	//	return response.GetUnAuthorized(c)
 	//}

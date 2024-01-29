@@ -23,7 +23,7 @@ func (h *HttpServer) AddPaths(userRepo *mysql.UserMysqlRepo, sessionRepo *mysql.
 				UserRepo:    userRepo,
 				SessionRepo: sessionRepo,
 			}
-			cc.IsLoggedInCostumer()
+			cc.IsLoggedInUser()
 			return next(cc)
 		}
 	})

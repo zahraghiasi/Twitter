@@ -17,7 +17,7 @@ func New() *MiddleWare {
 func (m *MiddleWare) LoggedInCostumerMiddleware() echo.MiddlewareFunc {
 	return middleware.KeyAuth(func(key string, c echo.Context) (bool, error) {
 		cc := c.(*CustomContext)
-		loggedIn, costumerObj := cc.IsLoggedInCostumer()
+		loggedIn, costumerObj := cc.IsLoggedInUser()
 		return loggedIn && costumerObj.ID > 0, nil
 	})
 }
