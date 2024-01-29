@@ -53,9 +53,9 @@ func (h *HttpServer) user(context echo.Context) error {
 }
 
 func (h *HttpServer) updateProfile(c echo.Context) error {
-	return response.GetTrueSuccess(c)
+	return h.NotImplement(c)
 }
 
-func (h *HttpServer) uploadProfile(c echo.Context) error {
-	return response.GetTrueSuccess(c)
+func (h *HttpServer) uploadPicture(c echo.Context) error {
+	return h.NotImplement(c)
 }

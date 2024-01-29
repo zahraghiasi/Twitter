@@ -1,41 +1,22 @@
 package middlewares
 
 import (
-	"github.com/ghiac/social/internal/models"
 	"github.com/ghiac/social/internal/mysql"
 	"github.com/ghiac/social/internal/repositories"
 	"github.com/labstack/echo/v4"
 	"github.com/patrickmn/go-cache"
-	"net/http"
 	"strings"
 	"time"
 )
-
-type HFunc func(c *CustomContext) error
-
-func NextContext(fun HFunc, loggedIn bool) echo.HandlerFunc {
-	return func(context echo.Context) error {
-		cc := context.(*CustomContext)
-		if loggedIn {
-			if !cc.LoggedIn {
-				return context.JSON(http.StatusUnauthorized, models.GeneralResponse{
-					Ok:          false,
-					Description: "UnAuthorized",
-				})
-			}
-		}
-		return fun(cc)
-	}
-}
 
 type CustomContext struct {
 	echo.Context
 	Cache       *cache.Cache
 	UserObj     *repositories.User
 	SessionObj  *repositories.Session
-	LoggedIn    bool
 	SessionRepo *mysql.SessionMysqlRepo
 	UserRepo    *mysql.UserMysqlRepo
+	LoggedIn    bool
 }
 
 func (c *CustomContext) ClearCache() {

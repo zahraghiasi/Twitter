@@ -30,16 +30,19 @@ func (h *HttpServer) AddPaths(userRepo *mysql.UserMysqlRepo, sessionRepo *mysql.
 
 	h.echo.POST("/Login", h.login)
 	h.echo.POST("/Register", h.register)
-	h.echo.POST("/UploadProfile", h.uploadProfile, h.middleWare.LoggedInMiddleware())
+	h.echo.POST("/UploadPicture", h.uploadPicture, h.middleWare.LoggedInMiddleware())
 	h.echo.POST("/UpdateProfile", h.updateProfile, h.middleWare.LoggedInMiddleware())
 	h.echo.POST("/User", h.user, h.middleWare.LoggedInCostumerMiddleware())
 	h.echo.GET("/User", h.user, h.middleWare.LoggedInCostumerMiddleware())
-	h.echo.POST("/Tweet", h.tweet, h.middleWare.LoggedInMiddleware())
-	h.echo.GET("/Tweet/:id", h.tweet, h.middleWare.LoggedInMiddleware())
+	h.echo.GET("/Tweets", h.tweets)
+	h.echo.GET("/Tweet/:id", h.getTweet)
+	h.echo.POST("/Tweet", h.createTweet, h.middleWare.LoggedInMiddleware())
 	h.echo.PUT("/Tweet/:id", h.editTweet, h.middleWare.LoggedInMiddleware())
 	h.echo.DELETE("/Tweet/:id", h.deleteTweet, h.middleWare.LoggedInMiddleware())
 	h.echo.GET("/React/Like/:id", h.likeReact, h.middleWare.LoggedInMiddleware())
 	h.echo.GET("/React/Remove/:id", h.removeReact, h.middleWare.LoggedInMiddleware())
+	h.echo.POST("/Follow/:id", h.follow, h.middleWare.LoggedInMiddleware())
+	h.echo.POST("/Unfollow/:id", h.unfollow, h.middleWare.LoggedInMiddleware())
 	h.echo.GET("/Search", h.search) // By hashtag and username
 }
 

@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"github.com/ghiac/social/internal/mysql"
 	"github.com/ghiac/social/internal/repositories"
 	"github.com/ghiac/social/internal/requests"
@@ -69,15 +68,12 @@ func (h *Handler) Register(u requests.LoginRequest) (*response.LoginResponse, *a
 			Where:    "Register method",
 		}
 	}
-
 	randomUserID := h.UserRepo.GetRandomID()
-	fmt.Println(randomUserID)
 	user := repositories.User{
 		Email:    u.Email,
 		Password: mysql.GetMD5Hash(u.Password),
 	}
 	user.ID = uint(randomUserID)
-	fmt.Println(user)
 	var err = h.UserRepo.Add(&user)
 	if err != nil {
 		return nil, &access.ServerError{

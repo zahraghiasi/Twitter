@@ -4,7 +4,21 @@ import "github.com/jinzhu/gorm"
 
 type Tweet struct {
 	gorm.Model
-	UserID    int
+	UserID    uint
 	Message   []byte
-	ReTweetID *int
+	ReTweetID *uint
+}
+
+func (t Tweet) ToResponse() *TweetResponse {
+	return &TweetResponse{
+		User:      User{},
+		Message:   string(t.Message),
+		ReTweetId: t.ReTweetID,
+	}
+}
+
+type TweetResponse struct {
+	User      User
+	Message   string
+	ReTweetId *uint
 }

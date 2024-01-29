@@ -25,3 +25,9 @@ func (u *TweetMysqlRepo) GetAll() []repositories.Tweet {
 	u.db.Find(tweets)
 	return tweets
 }
+
+func (u *TweetMysqlRepo) Get(i uint) (repositories.Tweet, bool) {
+	session := repositories.Tweet{}
+	notFound := u.db.Where("id = ? ", i).First(&session).RecordNotFound()
+	return session, !notFound
+}
